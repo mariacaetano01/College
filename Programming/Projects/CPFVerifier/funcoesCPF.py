@@ -1,7 +1,6 @@
 import random
 # Funções com testes de validação de CPF
 
-
 def bruto_dv1(cpf):
     # informa valor bruto da fórmula de verificação do primeiro dígito verificador
     return sum([i*int(d) for i, d in enumerate((cpf+"00")[::-1])])

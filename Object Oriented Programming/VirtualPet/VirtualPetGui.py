@@ -15,7 +15,7 @@ def new_game():
     
     print (str(new_game_name.get()))
     
-       
+    # STOPED HERE!!!! PROBLEMS WITH PY_VAR0 INSTEAD OF VAR NAME
     def new_game_root():
         new_game_win = Tk()
         new_game_win.title(f"{new_game_name}'s Farm")

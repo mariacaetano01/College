@@ -4,10 +4,10 @@ to teach concepts to the students, and encourage us to learn other languages and
 that other languages.
 
 ### Programming Classes
-This folder stores exercises, little projects ans tests done during the first and second semester at university,
-when I had programming and algorithms classes. At those classes, I learned the basics abour programming logics
+This folder stores exercises, little projects ans tests done during the first and second semesters at university,
+when I had programming and algorithms classes. At those classes, I learned the basics about programming logics
 and concepts about python.
 
 ### Oriented Objects Programming
-This folder stores exercises and projects done during the third and fourth semester at university, when I had
+This folder stores exercises and projects done during the third and fourth semesters at university, when I had
 oriented objects programming classes. At those classes, I learned about objects orientation with python.

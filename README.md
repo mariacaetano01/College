@@ -1,5 +1,5 @@
 # College
-Here are store some of my college projects, separed by classes. In my institute, teachers uses python language
+Here are stored some of my college projects, separed by classes. In my institute, teachers uses python language
 to teach concepts to the students, and encourage us to learn other languages and practice these concepts with
 that other languages.
 

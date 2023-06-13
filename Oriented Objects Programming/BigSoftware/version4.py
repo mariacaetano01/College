@@ -1,7 +1,7 @@
 # import enum method to avoid possible comparisons with strings later
 from enum import Enum 
 
-# 'enumerated' class to store brands that produce guitars
+# 'enumerated' class to store brands that produce instruments
 class Builder(Enum):
     FENDER = "fender"
     MARTIN = "martin"
@@ -12,12 +12,12 @@ class Builder(Enum):
     PRS = "prs"
     ANY = "any"
 
-# 'enumerated' class to store guitar types
+# 'enumerated' class to store instrument types
 class Type(Enum):
     ACOUSTIC = "acoustic"
     ELECTRIC = "eletric"
 
-# 'enumerated' class to store kinds of wood used to produce guitars
+# 'enumerated' class to store kinds of wood used to produce instruments
 class Wood(Enum):
     INDIAN_ROSEWOOD = "indian_rosewood"
     BRAZILIAN_ROSEWOOD = "brazilian_rosewood"
@@ -43,7 +43,7 @@ class InstrumentSpec():
         self._backWood = back_wood
         self._topWood = top_wood
 
-    # methods that will return guitars specifications 
+    # methods that will return instruments specifications 
     def _getBuilder(self):
         return self._builder
   
@@ -148,12 +148,12 @@ class Mandolin (Instrument):
     def __str__ (self):
         return f"{self._spec}"
     
-# create class inventory to store objects 
+# create class inventory to store all objects 
 class Inventory():
     def __init__(self):
         self._inventory = []
     
-    # include new guitar at the inventory
+    # include new guitar or mandolin at the inventory
     def _addInstrument(self, serial_number, price, spec): #spec is a instrument spec, might be guitar or mandolin
         if isinstance(spec, GuitarSpec):
             instrument = Guitar(serial_number, price, spec)
@@ -161,15 +161,15 @@ class Inventory():
             instrument = Mandolin(serial_number, price, spec)
         self._inventory.append(instrument)
   
-    # search guitar by its serial number
+    # search guitars or mandolins by its serial number
     def _getInstrument(self, serial_number):
         for instrument in self._inventory:
             if instrument._serialNum == serial_number:
                 return instrument
         return None
   
-  # search guitar by its specifications
-  # 'searchingGuitar' is also a object 'guitar'
+  # search guitars or mandolins  by its specifications
+  # 'searched_instrument' is also a object GuitarSpec or MandolinSpec 
     def _searchInstruments(self, searched_instrument):  
         if isinstance(searched_instrument, GuitarSpec):
             return [guitar for guitar in self._inventory if isinstance(guitar, Guitar) and guitar._spec._matches(searched_instrument)]
@@ -179,12 +179,13 @@ class Inventory():
 
 # FOURTH VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Rick has a Guitar Store, and needs a system to consult your inventory
-# Each guitar has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
+# Each guitar or mandolin has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
+# More recently, it has number of strings for guitars and style for mandolins
 
 # create an inventory object
 rick_inventory = Inventory()
 
-# add objects guitar in rick's inventory
+# add objects guitar and mandolin in rick's inventory
 spec1 = GuitarSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 6)
 rick_inventory._addInstrument("V95693", 1499.95, spec1)
 rick_inventory._addInstrument("V99999", 1599.95, spec1)
@@ -207,7 +208,7 @@ else:
 # create an object mandolin with bob's specifications
 bob_specs = MandolinSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, Style.A)
 
-# search for erin's guitar at rick's inventory
+# search for bob's mandolin at rick's inventory
 mandolin = rick_inventory._searchInstruments(bob_specs)
 if mandolin != None:
     for m in mandolin:

@@ -1,5 +1,5 @@
-# import Enum method (to avoid possible comparisons)
-from enum import Enum
+# import enum method to avoid possible comparisons with strings later
+from enum import Enum 
 
 # 'enumerated' class to store brands that produce guitars
 class Builder(Enum):
@@ -12,12 +12,12 @@ class Builder(Enum):
     PRS = "prs"
     ANY = "any"
 
-# class to store guitar types
-class GuitarType(Enum):
+# 'enumerated' class to store guitar types
+class Type(Enum):
     ACOUSTIC = "acoustic"
-    ELETRIC = "eletric"
+    ELECTRIC = "eletric"
 
-# class to store kinds of wood used to produce guitars
+# 'enumerated' class to store kinds of wood used to produce guitars
 class Wood(Enum):
     INDIAN_ROSEWOOD = "indian_rosewood"
     BRAZILIAN_ROSEWOOD = "brazilian_rosewood"
@@ -28,16 +28,20 @@ class Wood(Enum):
     ADIRONDACK = "adirondack"
     ALDER = "alder"
     SITKA = "sitka"
+    
+# 'enumerated' class to store types of mandolin
+class Style(Enum):
+    A = "a"
+    F = "f"
 
-# create a new class with guitar specifications
-class GuitarSpec():
-    def __init__(self, builder, model, typeg, back_wood, top_wood, strings):
+# create an new class with instruments' specifications
+class InstrumentSpec():
+    def __init__(self, builder, model, type, back_wood, top_wood):
         self._builder = builder
         self._model = model.lower()
-        self._guitarType = typeg
+        self._type = type
         self._backWood = back_wood
         self._topWood = top_wood
-        self._numStrings = strings
 
     # methods that will return guitars specifications 
     def _getBuilder(self):
@@ -46,8 +50,8 @@ class GuitarSpec():
     def _getModel(self):
         return self._model
   
-    def _getGuitarType(self):
-        return self._guitarType
+    def _getType(self):
+        return self._type
   
     def _getBackWood(self):
         return self._backWood
@@ -55,77 +59,125 @@ class GuitarSpec():
     def _getTopWood(self):
         return self._topWood
 
-    def _getNumStrings(self):
-        return self._numStrings
-
-    # method to match guitars, used at the inventory
-    def matches (self, guitar): #guitar is a GuitarSpec object
-        if self._builder != guitar._getGuitarSpec()._getBuilder():
+    # method to match instruments, used at the inventory
+    def _matches (self, searched_instrument): 
+        if self._builder != searched_instrument._getBuilder():
             return False
-        if self._model != "" and self._model != guitar._getGuitarSpec()._getModel():
+        if self._model != "" and self._model != searched_instrument._getModel():
             return False
-        if self._guitarType != guitar._getGuitarSpec()._getGuitarType():
+        if self._type != searched_instrument._getType():
             return False
-        if self._backWood != guitar._getGuitarSpec()._getBackWood():
+        if self._backWood != searched_instrument._getBackWood():
             return False
-        if self._topWood != guitar._getGuitarSpec()._getTopWood():
-            return False
-        if self._numStrings != guitar._getGuitarSpec()._getNumStrings():
+        if self._topWood != searched_instrument._getTopWood():
             return False
         return True
 
     # return a string with all specficiations
     def __str__(self):
-        return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._guitarType}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n\033[31mSTRINGS:\033[0m{self._numStrings}"
+        return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._type}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n"
 
-# create the class for "guitar" objects
-class Guitar():
-    def __init__(self, serial_number, price, specs):
-        self._serialNum = serial_number
-        self._priceTag = price
-        self._guitarSpec = specs #specs is a guitarSpec object
+# create the class for "guitar" objects' specifications
+class GuitarSpec(InstrumentSpec):
+    def __init__(self, builder, model, typeg, back_wood, top_wood, strings):
+        super().__init__( builder, model, typeg, back_wood, top_wood)
+        self._numStrings = strings
 
-    # methods that will return guitars specifications
-    def _getSerialNum(self):
-        return self._serialNum
-
-    def _getPriceTag(self):
-        return self._priceTag
-  
-    def _getGuitarSpec(self):
-        return self._guitarSpec
-  
+    # method that will return guitars specifications
+    def _getNumStrings(self):
+        return self._numStrings
+    
+    # method to match searched guitars with inventory guitars.
+    def _matches(self, searched_instrument):
+        if not super()._matches(searched_instrument):
+            return False
+        if self._numStrings != searched_instrument._numStrings:
+            return False
+        return True
+    
     # return a string with all specficiations
     def __str__(self):
-        return  f"\033[34mSERIAL NUMBER:\033[0m{self._serialNum}\n\033[31mPRICE:\033[0m R${self._priceTag}\n{self._guitarSpec}\n"
-  
-# create class inventory to store objects 'guitar'
+        return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._type}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n\033[31mSTRINGS:\033[0m{self._numStrings}\n"
+    
+# create a new class for "mandolin" objects' specifications
+class MandolinSpec(InstrumentSpec):
+    def __init__(self, builder, model, typeg, back_wood, top_wood, style):
+        super().__init__( builder, model, typeg, back_wood, top_wood)
+        self._style = style
+
+    # method that will return guitars specifications
+    def _getStyle(self):
+        return self._style
+    
+    # method to match searched guitars with inventory guitars.
+    def _matches(self, searched_instrument):
+        if not super()._matches(searched_instrument):
+            return False
+        if self._style != searched_instrument._style:
+            return False
+        return True
+    
+    # return a string with all specficiations
+    def __str__(self):
+        return f"\033[34mBUILDER:\033[0m{self._builder}\n\033[34mMODEL:\033[0m{self._model}\n\033[34mTYPE:\033[0m{self._type}\n\033[34mBACK WOOD:\033[0m{self._backWood}\n\033[34mTOP WOOD:\033[0m{self._topWood}\n\033[34mSTYLE:\033[0m{self._style}"
+
+# create a new abastract class Instrument, so when create new classes for new
+# intruments, they will 'be part of' Instruments.
+class Instrument():
+    def __init__ (self, serial_num, price, spec): #spec will be a instrument spec object
+        self._serialNum = serial_num
+        self._price = price
+        self._spec = spec
+        
+    def __str__ (self):
+        return f"{self._spec}"
+    
+# create a class for Guitar objects
+class Guitar (Instrument):
+    def __init__ (self, serial_num, price, spec):
+        super().__init__(serial_num, price, spec)
+    
+    def __str__ (self):
+        return f"{self._spec}"
+    
+# create a class for Mandolin objects
+class Mandolin (Instrument):
+    def __init__ (self, serial_num, price, spec):
+        super().__init__(serial_num, price, spec)
+    
+    def __str__ (self):
+        return f"{self._spec}"
+    
+# create class inventory to store objects 
 class Inventory():
     def __init__(self):
-        self.guitars = []
+        self._inventory = []
     
     # include new guitar at the inventory
-    def _addGuitar(self, serial_number, price, specs):
-        guitar = Guitar(serial_number, price, specs)
-        self.guitars.append(guitar)
+    def _addInstrument(self, serial_number, price, spec): #spec is a instrument spec, might be guitar or mandolin
+        if isinstance(spec, GuitarSpec):
+            instrument = Guitar(serial_number, price, spec)
+        if isinstance(spec, MandolinSpec):
+            instrument = Mandolin(serial_number, price, spec)
+        self._inventory.append(instrument)
   
     # search guitar by its serial number
-    def _getGuitar(self, serial_number):
-        for guitar in self.guitars:
-            if guitar._getSerialNum() == serial_number:
-                return guitar
+    def _getInstrument(self, serial_number):
+        for instrument in self._inventory:
+            if instrument._serialNum == serial_number:
+                return instrument
         return None
   
   # search guitar by its specifications
   # 'searchingGuitar' is also a object 'guitar'
-    def _searchGuitars(self, searchingGuitar):
-        matching_guitars = []
-        for guitar in self.guitars:
-            if guitar._getGuitarSpec().matches(searchingGuitar):
-                matching_guitars.append(guitar)
-        return matching_guitars if len(matching_guitars) != 0 else None     
+    def _searchInstruments(self, searched_instrument):  
+        if isinstance(searched_instrument, GuitarSpec):
+            return [guitar for guitar in self._inventory if isinstance(guitar, Guitar) and guitar._spec._matches(searched_instrument)]
+        if isinstance(searched_instrument, MandolinSpec):
+            return [mandolin for mandolin in self._inventory if isinstance(mandolin, Mandolin) and mandolin._spec._matches(searched_instrument)]
+        return None
 
-# THIRD VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# FOURTH VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Rick has a Guitar Store, and needs a system to consult your inventory
 # Each guitar has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
 
@@ -133,22 +185,32 @@ class Inventory():
 rick_inventory = Inventory()
 
 # add objects guitar in rick's inventory
-spec1 = GuitarSpec (Builder.FENDER.value, "Stratocastor", GuitarType.ELETRIC.value, Wood.ALDER.value, Wood.ALDER.value, 5)
-rick_inventory._addGuitar('0000', 1499.99, spec1)
-rick_inventory._addGuitar('0001', 1499.99, spec1)
+spec1 = GuitarSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 6)
+rick_inventory._addInstrument("V95693", 1499.95, spec1)
+rick_inventory._addInstrument("V99999", 1599.95, spec1)
+spec2 = MandolinSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, Style.A)
+rick_inventory._addInstrument("M12345", 1000.00, spec2)
 
-spec2 = GuitarSpec(Builder.GIBSON.value, "Ibanez", GuitarType.ACOUSTIC.value, Wood.SITKA.value, Wood.MAPLE.value, 12)
-rick_inventory._addGuitar('0003', 999.90, spec2)
-
-# a client (named Erin) wants a specific guitar
+# a client (named ERIN) wants a specific guitar
 # create an object guitar with erin's specifications
-erin_specs= GuitarSpec (Builder.FENDER.value, "Stratocastor", GuitarType.ELETRIC.value, Wood.ALDER.value, Wood.ALDER.value,5)
-erin_guitar = Guitar (' ', 0, erin_specs)
+erin_specs = GuitarSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, 6)
 
 # search for erin's guitar at rick's inventory
-guitar = rick_inventory._searchGuitars(erin_guitar)
+guitar = rick_inventory._searchInstruments(erin_specs)
 if guitar != None:
     for g in guitar:
         print (f"{g}")
+else:
+    print ("\033[31mNothing Found\033[0m")
+
+# a client (named BOB) wants a specific mandolin
+# create an object mandolin with bob's specifications
+bob_specs = MandolinSpec(Builder.FENDER, "stratocastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER, Style.A)
+
+# search for erin's guitar at rick's inventory
+mandolin = rick_inventory._searchInstruments(bob_specs)
+if mandolin != None:
+    for m in mandolin:
+        print (f"{m}")
 else:
     print ("\033[31mNothing Found\033[0m")

@@ -34,7 +34,7 @@ class Style(Enum):
     A = "a"
     F = "f"
 
-# create an new class with instruments' specifications
+# MODIFICATION: New class Instrument, with all instruments common specifications
 class InstrumentSpec():
     def __init__(self, builder, model, type, back_wood, top_wood):
         self._builder = builder
@@ -43,7 +43,7 @@ class InstrumentSpec():
         self._backWood = back_wood
         self._topWood = top_wood
 
-    # methods that will return instruments specifications 
+    # methods to return instruments' specifications 
     def _getBuilder(self):
         return self._builder
   
@@ -73,7 +73,7 @@ class InstrumentSpec():
             return False
         return True
 
-    # return a string with all specficiations
+    # method to return instruments's specifications as a string
     def __str__(self):
         return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._type}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n"
 
@@ -98,8 +98,8 @@ class GuitarSpec(InstrumentSpec):
     # return a string with all specficiations
     def __str__(self):
         return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._type}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n\033[31mSTRINGS:\033[0m{self._numStrings}\n"
-    
-# create a new class for "mandolin" objects' specifications
+
+# MODIFICATION: New class MandolinSpec added to store mandolin's specifications
 class MandolinSpec(InstrumentSpec):
     def __init__(self, builder, model, typeg, back_wood, top_wood, style):
         super().__init__( builder, model, typeg, back_wood, top_wood)
@@ -121,8 +121,8 @@ class MandolinSpec(InstrumentSpec):
     def __str__(self):
         return f"\033[34mBUILDER:\033[0m{self._builder}\n\033[34mMODEL:\033[0m{self._model}\n\033[34mTYPE:\033[0m{self._type}\n\033[34mBACK WOOD:\033[0m{self._backWood}\n\033[34mTOP WOOD:\033[0m{self._topWood}\n\033[34mSTYLE:\033[0m{self._style}"
 
-# create a new abastract class Instrument, so when create new classes for new
-# intruments, they will 'be part of' Instruments.
+# MODIFICATION: New class instrument, a father class to be a base for specif instruments classes
+# Note: when create new classes for new intruments, they will 'be part of' Instruments.
 class Instrument():
     def __init__ (self, serial_num, price, spec): #spec will be a instrument spec object
         self._serialNum = serial_num
@@ -131,7 +131,8 @@ class Instrument():
         
     def __str__ (self):
         return f"{self._spec}"
-    
+
+# MODIFICATION
 # create a class for Guitar objects
 class Guitar (Instrument):
     def __init__ (self, serial_num, price, spec):
@@ -139,15 +140,16 @@ class Guitar (Instrument):
     
     def __str__ (self):
         return f"{self._spec}"
-    
-# create a class for Mandolin objects
+
+# MODIFICATION   
+# create a class for Mandolin objects 
 class Mandolin (Instrument):
     def __init__ (self, serial_num, price, spec):
         super().__init__(serial_num, price, spec)
     
     def __str__ (self):
         return f"{self._spec}"
-    
+
 # create class inventory to store all objects 
 class Inventory():
     def __init__(self):
@@ -168,6 +170,7 @@ class Inventory():
                 return instrument
         return None
   
+  # MODIFICATION
   # search guitars or mandolins  by its specifications
   # 'searched_instrument' is also a object GuitarSpec or MandolinSpec 
     def _searchInstruments(self, searched_instrument):  
@@ -177,7 +180,7 @@ class Inventory():
             return [mandolin for mandolin in self._inventory if isinstance(mandolin, Mandolin) and mandolin._spec._matches(searched_instrument)]
         return None
 
-# FOURTH VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# FOURTH VERSION TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Rick has a Guitar Store, and needs a system to consult your inventory
 # Each guitar or mandolin has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
 # More recently, it has number of strings for guitars and style for mandolins

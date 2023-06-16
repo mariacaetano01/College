@@ -1,13 +1,15 @@
 # Big Software 
 
-The idea behind this program is based on the book "Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&D", by Brett McLaughlin,
+The idea behind this program is based on the book "Head First Object-Oriented
+Analysis and Design: A Brain Friendly Guide to OOA&D", by Brett McLaughlin,
 Gary Pollice and David West. My profesor recomended this lecture for us, and
 based on this, created a project to be done. He called "The Big Software".
 
 ### What is it about?
 
 Rick is a Guitars Shop owner, and this store is specialized to find the 
-perfect instruments for his demanding customers. Some months ago, Rick decided to change the old paper system to store your guitars and started 
+perfect instruments for his demanding customers. Some months ago, Rick 
+decided to change the old paper system to store your guitars and started 
 using a computational system. He hired a company to make this tool for 
 him, but the company made a dirty coding project.
 
@@ -32,7 +34,8 @@ just with its finality, with oriented programming concepts.
 
 ### Version 3
 
-Now Rick wants to sell guitars with 12 strings. This update needs a structure projected to be reusable and that can be maintained, even if has more updates 
+Now Rick wants to sell guitars with 12 strings. This update needs a structure 
+projected to be reusable and that can be maintained, even if has more updates 
 to do. Version 3 changes de project to include a new point of view in guitar
 specifications.
 
@@ -47,4 +50,15 @@ instrument in his store.
 
 ### Version 5
 
-Still in progress.
+The tool projected untill now is flawed. For example, if Mandolin and Guitars
+are instruments, and the only difference is the specifications, our project is
+not so flexible as much as we thought. This version throws the previous version
+away to create a new (and smaller!) project to Rick's store, even if he wants to
+sell a guitar, a banjo, a fiddle, a bass, a sax... any instrument.
+
+### Final Notes
+
+All te versions done are documented with clear coments and specific variable
+names, to better identify where everything is supposed to be. Virtual 
+environments were not used, and the only module imported for contruct this code
+is enum module. 

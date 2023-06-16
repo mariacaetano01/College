@@ -38,7 +38,7 @@ class GuitarSpec():
         self._backWood = back_wood
         self._topWood = top_wood
 
-    # methods that will return guitars specifications 
+    # methods to return guitar's specifications 
     def _getBuilder(self):
         return self._builder
   
@@ -54,17 +54,19 @@ class GuitarSpec():
     def _getTopWood(self):
         return self._topWood
   
+    # method to return guitar's specifications as a string
     def __str__(self):
         return f"\033[31mBUILDER:\033[0m{self._builder}\n\033[31mMODEL:\033[0m{self._model}\n\033[31mTYPE:\033[0m{self._guitarType}\n\033[31mBACK WOOD:\033[0m{self._backWood}\n\033[31mTOP WOOD:\033[0m{self._topWood}\n"
 
-# create the class for "guitar" objects
+# create the class for objects guitar
 class Guitar():
     def __init__(self, serial_number, price, builder, model, typeg, back_wood, top_wood):
         self._serialNum = serial_number
         self._priceTag = price
+        # specifications is a GuitatSpec object as an atribute
         self._guitarSpec = GuitarSpec(builder, model, typeg, back_wood, top_wood)
 
-    # methods that will return guitars specifications
+    # methods to return guitars specifications
     def _getSerialNum(self):
         return self._serialNum
 
@@ -74,29 +76,30 @@ class Guitar():
     def _getGuitarSpec(self):
         return self._guitarSpec
   
+    # method to return guitar's specifications as a string
     def __str__(self):
         return  f"\033[34mSERIAL NUMBER:\033[0m{self._serialNum}\n\033[31mPRICE:\033[0m R${self._priceTag}\n{self._guitarSpec}"
   
-# create class inventory to store objects 'guitar'
+# create class inventory to store objects guitar
 class Inventory():
     def __init__(self):
         self.guitars = []
     
-    # include new guitar at the inventory
+    # method to include new objects 'Guitar' at the inventory
     def _addGuitar(self, serial_number, price, builder, model, typeg, back_wood, top_wood):
         guitar = Guitar(serial_number, price, builder, model, typeg, back_wood, top_wood)
         self.guitars.append(guitar)
   
-    # search guitar by its serial number
+    # query method to find a guitar by your serial number
     def _getGuitar(self, serial_number):
         for guitar in self.guitars:
             if guitar._getSerialNum() == serial_number:
                 return guitar
         return None
   
-  # search guitar by its specifications
-  # 'searchingGuitar' is also a object 'guitar'
+    # QUERY METHOD BY SPECIFICATIONS
     def _searchGuitars(self, searchingGuitar):
+        # 'searchingGuitar' is also a Guitar object
         results = []
         for guitar in self.guitars:
             if searchingGuitar._getGuitarSpec()._getBuilder() != guitar._getGuitarSpec()._getBuilder():
@@ -114,7 +117,7 @@ class Inventory():
         return results if len(results) != 0 else None
      
 
-# SECOND VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# SECOND VERSION TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Rick has a Guitar Store, and needs a system to consult your inventory
 # Each guitar has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
 

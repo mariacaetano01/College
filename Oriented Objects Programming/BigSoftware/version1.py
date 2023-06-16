@@ -3,31 +3,31 @@ from enum import Enum
 
 # class to store brands that produce guitars
 class Builder(Enum):
-  FENDER = "fender"
-  MARTIN = "martin"
-  GIBSON = "gibson"
-  COLLINGS = "collings"
-  OLSON = "olson"
-  RYAN = "ryan"
-  PRS = "prs"
-  ANY = "any"
+    FENDER = "fender"
+    MARTIN = "martin"
+    GIBSON = "gibson"
+    COLLINGS = "collings"
+    OLSON = "olson"
+    RYAN = "ryan"
+    PRS = "prs"
+    ANY = "any"
 
 # class to store guitar types
 class GuitarType(Enum):
-  ACOUSTIC = "acoustic"
-  ELETRIC = "eletric"
+    ACOUSTIC = "acoustic"
+    ELETRIC = "eletric"
 
 # class to store kinds of wood used to produce guitars
 class Wood(Enum):
-  INDIAN_ROSEWOOD = "indian_rosewood"
-  BRAZILIAN_ROSEWOOD = "brazilian_rosewood"
-  MAHOGANY = "mahogany"
-  MAPLE = "maple"
-  COCOBOLO = "ococobolo"
-  CEDAR = "cedar"
-  ADIRONDACK = "adirondack"
-  ALDER = "alder"
-  SITKA = "sitka"
+    INDIAN_ROSEWOOD = "indian_rosewood"
+    BRAZILIAN_ROSEWOOD = "brazilian_rosewood"
+    MAHOGANY = "mahogany"
+    MAPLE = "maple"
+    COCOBOLO = "ococobolo"
+    CEDAR = "cedar"
+    ADIRONDACK = "adirondack"
+    ALDER = "alder"
+    SITKA = "sitka"
   
 # class for the "guitar" objects
 class Guitar():
@@ -40,7 +40,7 @@ class Guitar():
         self.backWood = back_wood
         self.topWood = top_wood
 
-    # methods that will return guitars specifications
+    # methods to return guitars specifications
     def getSerialNum(self):
         return self.serialNum
 
@@ -70,7 +70,7 @@ class Guitar():
     def __str__ (self):
         return f"SERIAL NUM:{self.serialNum}\nBUILDER:{self.builder}\nTYPE:{self.typeg}\nMODEL:{self.model}\nBack Wood:{self.backWood}\nTop Wood:{self.topWood}\nPROCE: R${self.price}"
 
-# class to store "guitar" objects
+# create class inventory to store objects guitar
 class Inventory():
     def __init__ (self):
         self.guitars = []
@@ -107,7 +107,7 @@ class Inventory():
     def __str__ (self):
         return f"Inventory List:\n{[i for i in self.guitars]}"
 
-# FISRT VERSIONS TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# FISRT VERSION TESTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Rick has a Guitar Store, and needs a system to consult your inventory
 # Each guitar has a serial number, a price, a builder, a model, a type, a back wood, and a top wood
 

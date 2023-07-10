@@ -60,5 +60,4 @@ sell a guitar, a banjo, a fiddle, a bass, a sax... any instrument.
 
 All te versions done are documented with clear coments and specific variable
 names, to better identify where everything is supposed to be. Virtual 
-environments were not used, and the only module imported for contruct this code
-is enum module. 
+environments were not used, and the only module imported for contruct this code is enum module. 

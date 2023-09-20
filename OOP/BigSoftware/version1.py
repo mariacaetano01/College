@@ -100,6 +100,7 @@ class Inventory():
             if searchingGuitar.getBackWood() != guitar.getBackWood():
                 continue
             if searchingGuitar.getTopWood() != guitar.getTopWood():
+                
                 continue
             print (f'\033[31m{guitar}\0330m\n')
     
